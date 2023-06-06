@@ -107,9 +107,9 @@ public class WatchlistAppGUI extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
-        JButton addButton = new JButton("Add Media");
-        JButton removeButton = new JButton("Remove Media");
-        JButton markWatchedButton = new JButton("Mark as Watched");
+        JButton addButton = new JButton("Sachen hinzufügen");
+        JButton removeButton = new JButton("Sachen wegmachen");
+        JButton markWatchedButton = new JButton("als gesehen markieren");
 
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
