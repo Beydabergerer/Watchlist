@@ -1,0 +1,169 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+class Media {
+    private String title;
+    private boolean watched;
+    private String notes;
+    private int rating;
+
+    public Media(String title) {
+        this.title = title;
+        this.watched = false;
+        this.notes = "";
+        this.rating = 0;
+    }
+
+    // Getter and setter methods for the attributes
+
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.watched = watched;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+}
+
+class Watchlist {
+    private List<Media> mediaList;
+
+    public Watchlist() {
+        this.mediaList = new ArrayList<>();
+    }
+
+    public void addMedia(Media media) {
+        mediaList.add(media);
+    }
+
+    public void removeMedia(Media media) {
+        mediaList.remove(media);
+    }
+
+    public void markAsWatched(Media media) {
+        media.setWatched(true);
+    }
+
+    public void addNotes(Media media, String notes) {
+        media.setNotes(notes);
+    }
+
+    public void rateMedia(Media media, int rating) {
+        media.setRating(rating);
+    }
+
+    public List<Media> getUnwatchedMedia() {
+        List<Media> unwatchedMedia = new ArrayList<>();
+        for (Media media : mediaList) {
+            if (!media.isWatched()) {
+                unwatchedMedia.add(media);
+            }
+        }
+        return unwatchedMedia;
+    }
+}
+
+public class WatchlistAppGUI extends JFrame {
+    private Watchlist watchlist;
+    private DefaultListModel<Media> listModel;
+    private JList<Media> mediaList;
+
+    public WatchlistAppGUI() {
+        watchlist = new Watchlist();
+        listModel = new DefaultListModel<>();
+
+        setTitle("Watchlist");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLayout(new BorderLayout());
+
+        JPanel buttonPanel = new JPanel();
+        JButton addButton = new JButton("Add Media");
+        JButton removeButton = new JButton("Remove Media");
+        JButton markWatchedButton = new JButton("Mark as Watched");
+
+        buttonPanel.add(addButton);
+        buttonPanel.add(removeButton);
+        buttonPanel.add(markWatchedButton);
+
+        JPanel listPanel = new JPanel();
+        mediaList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(mediaList);
+        listPanel.add(scrollPane);
+
+        add(buttonPanel, BorderLayout.NORTH);
+        add(listPanel, BorderLayout.CENTER);
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = JOptionPane.showInputDialog("Enter media title:");
+                if (title != null && !title.isEmpty()) {
+                    Media media = new Media(title);
+                    watchlist.addMedia(media);
+                    listModel.addElement(media);
+                }
+            }
+        });
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Media selectedMedia = mediaList.getSelectedValue();
+                if (selectedMedia != null) {
+                    watchlist.removeMedia(selectedMedia);
+                    listModel.removeElement(selectedMedia);
+                }
+            }
+        });
+
+        markWatchedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Media selectedMedia = mediaList.getSelectedValue();
+                if (selectedMedia != null) {
+                    selectedMedia.setWatched(true);
+                    mediaList.repaint();
+                }
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                WatchlistAppGUI app = new WatchlistAppGUI();
+                app.setVisible(true);
+            }
+        });
+    }
+}
