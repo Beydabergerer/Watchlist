@@ -126,7 +126,7 @@ public class WatchlistAppGUI extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String title = JOptionPane.showInputDialog("Enter media title:");
+                String title = JOptionPane.showInputDialog("Titel eingeben:");
                 if (title != null && !title.isEmpty()) {
                     Media media = new Media(title);
                     watchlist.addMedia(media);
