@@ -1,2 +1,2 @@
 # Watchlist
-Watchliust for Informatik
+Watchlist for Informatik
