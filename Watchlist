@@ -1,3 +1,6 @@
+EY, IHR MÜSST RICK UND MORTY SCHAUEN
+
+
 from tkinter import *
 from tkinter import messagebox
 def new():
@@ -6,13 +9,13 @@ def new():
         lb.insert(END, a)
         entry.delete(0, "end")
     else:
-        messagebox.showwarning("!!!")
+        messagebox.showwarning("ALARM!")
 def delete():
     lb.delete(ANCHOR)
 
 ws = Tk()
 ws.geometry('500x450+500+200')
-ws.title('Bitch')
+ws.title('🎬Watchlist🎥')
 ws.resizable(width=False, height=False)
 frame = Frame(ws)
 frame.pack(pady=10)
@@ -20,7 +23,7 @@ frame.pack(pady=10)
 lb = Listbox(frame, activestyle="none")
 lb.pack(side=LEFT, fill=BOTH)
 
-list = ['Rick and Morty', 'Haus des Geldes']
+list = ['Rick and Morty']
 
 for i in list:
     lb.insert(END, i)
