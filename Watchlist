@@ -1,169 +1,46 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+from tkinter import *
+from tkinter import messagebox
+def new():
+    a = entry.get()
+    if a != "":
+        lb.insert(END, a)
+        entry.delete(0, "end")
+    else:
+        messagebox.showwarning("!!!")
+def delete():
+    lb.delete(ANCHOR)
 
-class Media {
-    private String title;
-    private boolean watched;
-    private String notes;
-    private int rating;
+ws = Tk()
+ws.geometry('500x450+500+200')
+ws.title('Bitch')
+ws.resizable(width=False, height=False)
+frame = Frame(ws)
+frame.pack(pady=10)
 
-    public Media(String title) {
-        this.title = title;
-        this.watched = false;
-        this.notes = "";
-        this.rating = 0;
-    }
+lb = Listbox(frame, activestyle="none")
+lb.pack(side=LEFT, fill=BOTH)
 
-    // Getter and setter methods for the attributes
+list = ['Rick and Morty', 'Haus des Geldes']
 
-    public String getTitle() {
-        return title;
-    }
+for i in list:
+    lb.insert(END, i)
 
-    public boolean isWatched() {
-        return watched;
-    }
+sb = Scrollbar(frame)
+sb.pack(side=RIGHT, fill=BOTH)
 
-    public void setWatched(boolean watched) {
-        this.watched = watched;
-    }
+lb.config(yscrollcommand=sb.set)
+sb.config(command=lb.yview)
 
-    public String getNotes() {
-        return notes;
-    }
+entry = Entry(ws)
+entry.pack(pady=20)
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
+button_frame = Frame(ws)
+button_frame.pack(pady=20)
 
-    public int getRating() {
-        return rating;
-    }
+addB = Button(button_frame, text='+', command=new)
+addB.pack(fill=BOTH, expand=True, side=LEFT)
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
+delB = Button(button_frame, text='-', command=delete)
+delB.pack(fill=BOTH, expand=True, side=LEFT)
 
-    @Override
-    public String toString() {
-        return title;
-    }
-}
-
-class Watchlist {
-    private List<Media> mediaList;
-
-    public Watchlist() {
-        this.mediaList = new ArrayList<>();
-    }
-
-    public void addMedia(Media media) {
-        mediaList.add(media);
-    }
-
-    public void removeMedia(Media media) {
-        mediaList.remove(media);
-    }
-
-    public void markAsWatched(Media media) {
-        media.setWatched(true);
-    }
-
-    public void addNotes(Media media, String notes) {
-        media.setNotes(notes);
-    }
-
-    public void rateMedia(Media media, int rating) {
-        media.setRating(rating);
-    }
-
-    public List<Media> getUnwatchedMedia() {
-        List<Media> unwatchedMedia = new ArrayList<>();
-        for (Media media : mediaList) {
-            if (!media.isWatched()) {
-                unwatchedMedia.add(media);
-            }
-        }
-        return unwatchedMedia;
-    }
-}
-
-public class WatchlistAppGUI extends JFrame {
-    private Watchlist watchlist;
-    private DefaultListModel<Media> listModel;
-    private JList<Media> mediaList;
-
-    public WatchlistAppGUI() {
-        watchlist = new Watchlist();
-        listModel = new DefaultListModel<>();
-
-        setTitle("Watchlist");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
-        setLayout(new BorderLayout());
-
-        JPanel buttonPanel = new JPanel();
-        JButton addButton = new JButton("Add Media");
-        JButton removeButton = new JButton("Remove Media");
-        JButton markWatchedButton = new JButton("Mark as Watched");
-
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
-        buttonPanel.add(markWatchedButton);
-
-        JPanel listPanel = new JPanel();
-        mediaList = new JList<>(listModel);
-        JScrollPane scrollPane = new JScrollPane(mediaList);
-        listPanel.add(scrollPane);
-
-        add(buttonPanel, BorderLayout.NORTH);
-        add(listPanel, BorderLayout.CENTER);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String title = JOptionPane.showInputDialog("Enter media title:");
-                if (title != null && !title.isEmpty()) {
-                    Media media = new Media(title);
-                    watchlist.addMedia(media);
-                    listModel.addElement(media);
-                }
-            }
-        });
-
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Media selectedMedia = mediaList.getSelectedValue();
-                if (selectedMedia != null) {
-                    watchlist.removeMedia(selectedMedia);
-                    listModel.removeElement(selectedMedia);
-                }
-            }
-        });
-
-        markWatchedButton.addActionListener(new ActionListener() {
-            @Override //Blop
-            public void actionPerformed(ActionEvent e) {
-                Media selectedMedia = mediaList.getSelectedValue();
-                if (selectedMedia != null) {
-                    selectedMedia.setWatched(true);
-                    mediaList.repaint();
-                }
-            }
-        });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                WatchlistAppGUI app = new WatchlistAppGUI();
-                app.setVisible(true);
-            }
-        });
-    }
-}
+ws.mainloop()
