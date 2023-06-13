@@ -1,6 +1,3 @@
-EY, IHR MÜSST RICK UND MORTY SCHAUEN
-
-
 from tkinter import *
 from tkinter import messagebox
 def new():
@@ -37,13 +34,13 @@ sb.config(command=lb.yview)
 entry = Entry(ws)
 entry.pack(pady=20)
 
-button_frame = Frame(ws)
-button_frame.pack(pady=20)
+frame = Frame(ws)
+frame.pack(pady=20)
 
-addB = Button(button_frame, text='+', command=new)
+addB = Button(frame, text='+', command=new)
 addB.pack(fill=BOTH, expand=True, side=LEFT)
 
-delB = Button(button_frame, text='-', command=delete)
+delB = Button(frame, text='-', command=delete)
 delB.pack(fill=BOTH, expand=True, side=LEFT)
 
 ws.mainloop()
