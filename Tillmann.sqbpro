@@ -1,2 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="H:/Desktop/DB Browser for SQLite/Tillmann.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1046"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:maintilli"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Filme" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="114"/><column index="2" value="56"/><column index="3" value="119"/><column index="4" value="120"/><column index="5" value="40"/><column index="6" value="55"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Tilli 2" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Tillmann" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="tilli" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="145"/><column index="2" value="88"/><column index="3" value="119"/><column index="4" value="79"/><column index="5" value="42"/><column index="6" value="77"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">DROP TABLE Tillmann;
-</sql><current_tab id="0"/></tab_sql></sqlb_project>
+CREATE TABLE Filme (
+    Titel VARCHAR(100),
+    Genre VARCHAR(50),
+    Erscheinungsjahr INT,
+    IMDB_Bewertung FLOAT,
+    FSK INT,
+    Laenge INT
+);
+
+INSERT INTO Filme (Titel, Genre, Erscheinungsjahr, IMDB_Bewertung, FSK, Laenge)
+VALUES
+    ('Keinohrhasen', 'Komödie', 2007, 6.3, 12, 116),
+    ('Zweiohrküken', 'Komödie', 2009, 4.9, 12, 124),
+    ('Kokowääh', 'Komödie', 2011, 6.3, 6, 122),
+    ('Schutzengel', 'Action', 2012, 5.8, 16, 130),
+    ('Kokowääh 2', 'Komödie', 2013, 5.4, 6, 122),
+    ('Honig im Kopf', 'Drama', 2014, 6.8, 6, 139),
+    ('Tschiller: Off Duty', 'Action', 2016, 3.7, 16, 140),
+    ('Conni & Co', 'Familie', 2016, 5.2, 0, 104),
+    ('Klassentreffen 1.0', 'Komödie', 2018, 4.9, 12, 100),
+    ('Head Full of Honey', 'Drama', 2018, 2.9, 0, 139),
+    ('Manta, Manta - Zwoter Teil', 'Komödie', 2023, 2.8, 12, 127),
+    ('Conni & Co. 2 - Rettet die Kanincheninsel', 'Komödie', 2017, 3.0, 0, 92),
+    ('1 1/2 Ritter - Auf der Suche nach der hinreißenden Herzelinde', 'Komödie', 2008, 3.7, 6, 115),
+    ('barfuss', 'Komödie', 2005, 7.1, 6, 118),
+    ('Erbsen auf halb 6', 'Komödie', 2004, 6.9, 6, 111),
+    ('Rabbit Without Ears', 'Komödie', 2024, 3.2, 6, 138),
+    ('Fontane Effi Briest oder Viele, die eine Ahnung haben von ihren Möglichkeiten und ihren Bedürfnissen und trotzdem das herrschende System in ihrem Kopf akzeptieren durch ihre Taten und es somit festigen und durchaus bestätigen', 'Komödie', 1974, 6.9, 12, 140); 
