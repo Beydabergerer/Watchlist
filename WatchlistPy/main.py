@@ -1,52 +1,62 @@
+from ttkwidgets.autocomplete import AutocompleteEntry
 from tkinter import *
 from tkinter import messagebox
-from tkinter import ttk
-
-# Create button definition
+countries = [
+      "Avengers Infinity War", "Avengers Endgame", "Godfather", "Psycho", "Harry Potter", "Blacklist", "oohioi", "kbjbjj", "Wubalubadubdub"
+        ]
 def new():
     a = entry.get()
     if a != "":
-        tree.insert('', 'end', text="1", values=a)
+        lb.insert(END, a)
         entry.delete(0, "end")
     else:
         messagebox.showwarning("ALARM!")
-
-# Delete Button definition
 def delete():
-        selected_items = tree.selection()
-        for selected_item in selected_items:
-            tree.delete(selected_item)
-
-# erstellen eines Fenster mit tkinter
+    lb.delete(ANCHOR)
 
 ws = Tk()
-ws.geometry('600x450+500+200')
+ws.geometry('500x450')
 ws.title('🎬Watchlist🎥')
+
 ws.resizable(width=False, height=False)
 frame = Frame(ws)
 frame.pack(pady=10)
 
-s = ttk.Style()
-s.theme_use('clam')
+lb = Listbox(frame, activestyle="none")
+lb.pack(side=LEFT, fill=BOTH)
 
-# Add a Treeview widget
-tree = ttk.Treeview(ws, column=("c1", "c2"), show='headings', height=5)
+list = ['Rick and Morty']
 
-tree.column("# 1", anchor=CENTER)
-tree.heading("# 1", text="Titel")
-tree.column("# 2", anchor=CENTER)
-tree.heading("# 2", text="Genre")
-
-# Insert the data in Treeview widget
-tree.insert('', 'end', text="1", values=("rick and morty", 'comedy'))
-
-tree.pack()
-
-# erstellen der Tabelle mit:
-# https://www.tutorialspoint.com/how-to-display-a-listbox-with-columns-using-tkinter
+for i in list:
+    lb.insert(END, i)
 
 sb = Scrollbar(frame)
 sb.pack(side=RIGHT, fill=BOTH)
+
+lb.config(yscrollcommand=sb.set)
+sb.config(command=lb.yview)
+
+Label(text="Film hinzufügen").pack()
+
+entry = AutocompleteEntry(completevalues=countries)
+entry.pack(pady=20)
+
+frame = Frame(ws)
+frame.pack(pady=20)
+
+addB = Button(frame, text='+', command=new)
+addB.pack(fill=BOTH, expand=True, side=LEFT)
+
+delB = Button(frame, text='-', command=delete)
+delB.pack(fill=BOTH, expand=True, side=LEFT)
+
+
+
+ws.mainloop()
+sb.pack(side=RIGHT, fill=BOTH)
+
+lb.config(yscrollcommand=sb.set)
+sb.config(command=lb.yview)
 
 entry = Entry(ws)
 entry.pack(pady=20)
